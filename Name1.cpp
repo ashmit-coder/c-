@@ -6,6 +6,7 @@
 using namespace std;
 
 
+
 int BinarySearch(int high,string p,char ch){
     int low=0;
     // sort(p.begin(),p.end());
@@ -15,7 +16,7 @@ int BinarySearch(int high,string p,char ch){
             low = mid+1;
         }
         else if(p[mid]>ch) high = mid-1;
-        else return mid;
+        else return 1;
         
     }
     return -1;
@@ -24,14 +25,15 @@ int BinarySearch(int high,string p,char ch){
 
 int main()
 {
-int t,high,n,pos;
+int t,high,n,pos,count=0;
 string p1,p2,pc;
 string cc,c;
 cin>>t;
 while(t--){
-    pc="";
+        pc="";
     cc="";
-    bool sta = true;
+    count = 0;
+    // bool sta = true;
     cin>>p1>>p2;
     pc =p1+p2;
     cin>>n;
@@ -40,8 +42,7 @@ while(t--){
         cc+=c;
 
     }
-    sort(cc.begin(),cc.end());
-    // we will use binary search for this project to avoid TLE
+    
     for(int i=0; i<cc.size();i++)
     {
         high  = pc.size();
@@ -49,19 +50,17 @@ while(t--){
         pos= BinarySearch(high,pc,cc[i]);
         if (pos==-1){
             cout<<"NO\n";
-            sta = false;
+            // sta = false;
             break;
-        }   
-        else
-        {
-            pc.erase(pc.begin()+pos);
-            sta = true;
-        } 
+        }  
+        else{
+            count++;
+        }
     }
-    if(sta == true){
+    if(count == cc.size()){
         cout<<"YES\n";
     }
-    
-}   
+
+}
  return 0;
 }
